@@ -1,8 +1,8 @@
 const Future = Fluture;
 
-const concatString = R.reduce(R.concat)("");
+const concatString = R.reduce (R.concat) ("");
 
-const getEndpoint = currencyCode => concatString([
+const getEndpoint = currencyCode => concatString ([
 	"https://free.currconv.com/api/v7/convert?q=",
 	currencyCode,
 	"_VND&compact=ultra&apiKey=ab07142fb8b095dc7bc5"
@@ -16,8 +16,8 @@ const FGetCurrencyRate = currencyCode =>
 		// extract the currency rate
 		.pipe(Future.map (R.compose (R.head, R.values)))
 
-const FtoConsume = currencyCode => (FGetCurrencyRate (currencyCode))
-  .pipe(Future.fork (console.error) (displayResult));
+const FtoConsume = currencyCode => 
+	(FGetCurrencyRate (currencyCode)).pipe (Future.fork (console.error) (displayResult));
 
 const displayResult = rate => {
 	const amount = parseFloat(document.getElementById("amount").value);
